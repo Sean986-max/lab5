@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise 1 - HTML5 Canvas</title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="600" height="600"></canvas>
+
+<script>
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+
+    // green background
+    ctx.fillStyle = "#90ee90";
+    ctx.fillRect(10, 10, 580, 580);
+
+    // yellow face
+    ctx.beginPath();
+    ctx.arc(300, 300, 235, 0, Math.PI * 2);
+    ctx.fillStyle = "#ffff00";
+    ctx.fill();
+    ctx.strokeStyle = "#4a4a4a";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // eyes
+    ctx.beginPath();
+    ctx.arc(215, 235, 20, 0, Math.PI * 2);
+    ctx.fillStyle = "#111111";
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(405, 235, 20, 0, Math.PI * 2);
+    ctx.fill();
+
+    // nose
+    ctx.beginPath();
+    ctx.moveTo(300, 298);
+    ctx.lineTo(300, 356);
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // mouth
+    ctx.beginPath();
+    ctx.arc(300, 350, 80, Math.PI * 0.11, Math.PI * 0.89);
+    ctx.stroke();
+
+    // text at the bottom
+    ctx.fillStyle = "#0a640a";
+    ctx.font = "bold 35px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("The Canvas brought me to life!", 300, 592);
+</script>
+
+</body>
+</html>

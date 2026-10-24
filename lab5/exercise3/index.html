@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise 3 - To-Do List</title>
+</head>
+<body>
+
+<h2>My To-Do List</h2>
+
+<input type="text" id="taskInput" placeholder="Enter a task">
+<button onclick="addTask()">Add Task</button>
+
+<ul id="taskList"></ul>
+
+<script>
+    var input = document.getElementById("taskInput");
+    var list = document.getElementById("taskList");
+
+    // read the saved tasks, use [] if there is nothing yet
+    var tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    function renderTasks() {
+        list.innerHTML = "";
+        for (var i = 0; i < tasks.length; i++) {
+            var li = document.createElement("li");
+            li.textContent = tasks[i];
+
+            // small delete button for each task
+            var del = document.createElement("button");
+            del.textContent = "Delete";
+            del.style.marginLeft = "10px";
+            del.setAttribute("onclick", "deleteTask(" + i + ")");
+
+            li.appendChild(del);
+            list.appendChild(li);
+        }
+    }
+
+    function saveTasks() {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+
+    function addTask() {
+        var text = input.value.trim();
+        if (text === "") {
+            return;
+        }
+        tasks.push(text);
+        // clear the box so the next task can be typed straight away
+        input.value = "";
+        saveTasks();
+        renderTasks();
+    }
+
+    function deleteTask(index) {
+        tasks.splice(index, 1);
+        saveTasks();
+        renderTasks();
+    }
+
+    // show the tasks that were saved last time
+    renderTasks();
+</script>
+
+</body>
+</html>
